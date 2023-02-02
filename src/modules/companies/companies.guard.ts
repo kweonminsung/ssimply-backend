@@ -18,6 +18,9 @@ export class CompanyExistGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
+    if (!request.headers.authorization)
+      throw new BadRequestException('invalid request');
+
     const userId = (
       this.jwtService.decode(request.headers.authorization.slice(7)) as Payload
     ).id;

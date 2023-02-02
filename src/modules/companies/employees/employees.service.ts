@@ -43,7 +43,7 @@ export class EmployeesService {
       },
     });
 
-    this.emailService.send(
+    await this.emailService.send(
       [dto.email],
       '[씸플리] 인건비 지급 관련 서류 요청',
       'employee.ejs',

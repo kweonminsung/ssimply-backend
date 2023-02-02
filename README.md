@@ -1,22 +1,21 @@
 # [TEAM I] ssimply-backend
- 
-이 Repository는 "SSimply" 의 웹 백엔드를 담당합니다. 
 
-다음과 같은 기능이 포함되어 있습니다. 
+이 Repository는 "SSimply" 의 웹 백엔드를 담당합니다.
+
+다음과 같은 기능이 포함되어 있습니다.
 
 - 회원가입 및 로그인
 - 회사/직원/거래처 관리
 - 인건비 관련 서류 자동 생성
 - 필수 제출 서류 수집을 위한 메일 발송
 
-## 프로젝트에서 사용한 기술 
+## 프로젝트에서 사용한 기술
 
 본 Repository는 `pacakge.json` 에 있는 오픈소스 패키지를 사용하였습니다.
 
 또 다음 Code Snippet 이 포함되어 있습니다.
 
 - [NestJS Malier document](https://nest-modules.github.io/mailer/docs/mailer.html)
-
 
 ## Dev Server 실행 방법
 
@@ -33,11 +32,11 @@
 2. 본 Repository를 로컬 환경에 Clone 받습니다.
 3. `docker compose -f=.docker/production-compose.yml up -d` 을 이용하여 실행해 줍니다.
 
-
 ## 환경 변수 및 시크릿
-1. 필요한 환경 변수는 `.env.example` 에 명시되어 있습니다.
-    1. JWT_SECRET 은 18-24자리 이내 a-Z,0-9 로 설정되어야 합니다.
 
+1. 필요한 환경 변수는 `.env.example` 에 명시되어 있습니다.
+   1. JWT_SECRET 은 18-24자리 이내 a-Z,0-9 로 설정되어야 합니다.
 
 ## 기타
+
 무박 3일의 기적 씸플리 화이팅

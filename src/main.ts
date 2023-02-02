@@ -21,9 +21,12 @@ async function bootstrap() {
 
   // CORS
   app.enableCors({
-    origin: '*',
+    origin: [
+      'http://localhost:3000',
+      'http://ssimply.hackathon.sparcs.org',
+      'https://ssimply.hackathon.sparcs.org',
+    ],
     credentials: true,
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
   });
 
   // Env settings
