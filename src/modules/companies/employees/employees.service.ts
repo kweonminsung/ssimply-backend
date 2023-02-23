@@ -1,3 +1,4 @@
+import { ConfigService } from '@nestjs/config';
 import { base64encoder } from 'src/common/utils/base64encoder';
 import { EmployeeViewDto } from './dtos/employee-view.dto';
 import { CommonResponseDto } from 'src/common/dtos/common-response.dto';
@@ -16,6 +17,7 @@ export class EmployeesService {
     private readonly prismaService: PrismaService,
     private readonly emailService: EmailService,
     private readonly filesService: FilesService,
+    private readonly configService: ConfigService,
   ) {}
 
   async create(
@@ -53,7 +55,7 @@ export class EmployeesService {
         position: user.position,
         name: user.name,
         email: dto.email,
-        link: `${process.env.APP_DOMAIN}/emp/${base64encoder(
+        link: `${this.configService.get('app.baseURL')}/emp/${base64encoder(
           JSON.stringify({
             service: 'SALARY',
             to: employee.id,

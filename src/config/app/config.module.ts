@@ -6,6 +6,7 @@ import { PrismaModule } from '../database/prisma.module';
 import { FileConfigModule } from '../file/file.module';
 import configuration from './configuration';
 import * as path from 'path';
+import { FileConfigType } from '../file/enums/file-config-type.enum';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import * as path from 'path';
       envFilePath: '.env',
     }),
     PrismaModule,
-    FileConfigModule,
+    FileConfigModule.register(FileConfigType.LOCAL),
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

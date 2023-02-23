@@ -1,8 +1,9 @@
+import { FILE_CONFIG_SERVICE } from './../../../config/file/constants/file-config-service.constant';
 import { WordService } from './word/word.service';
 import { CommonResponseDto } from './../../../common/dtos/common-response.dto';
 import { stream2buffer } from 'src/common/utils/stream2buffer';
 import { FileConfigService } from './../../../config/file/file.service';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { Company, File, Salary_File } from '@prisma/client';
 import { PrismaService } from 'src/config/database/prisma.service';
 import { FileResponseDto } from 'src/modules/files/dtos/files-response.dto';
@@ -16,9 +17,10 @@ import { pdfMerger } from 'src/common/utils/pdfMerger';
 @Injectable()
 export class SalariesService {
   constructor(
-    private readonly prismaService: PrismaService,
-    private readonly filesService: FilesService,
+    @Inject(FILE_CONFIG_SERVICE)
     private readonly fileConfigService: FileConfigService,
+    private readonly filesService: FilesService,
+    private readonly prismaService: PrismaService,
     private readonly wordService: WordService,
   ) {}
 

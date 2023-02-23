@@ -1,8 +1,9 @@
+import { FILE_CONFIG_SERVICE } from './../../config/file/constants/file-config-service.constant';
 import { FileResponseDto } from 'src/modules/files/dtos/files-response.dto';
 import { CommonResponseDto } from './../../common/dtos/common-response.dto';
 import { PrismaService } from './../../config/database/prisma.service';
 import { FileConfigService } from './../../config/file/file.service';
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { Injectable, BadRequestException, Inject } from '@nestjs/common';
 import { FileCreateResponseDto } from './dtos/files-create-response.dto';
 import { File } from '@prisma/client';
 import { OccupiedFilePayload } from './occupied-file.payload';
@@ -12,6 +13,7 @@ import { base64decoder } from 'src/common/utils/base64decoder';
 @Injectable()
 export class FilesService {
   constructor(
+    @Inject(FILE_CONFIG_SERVICE)
     private readonly fileConfigService: FileConfigService,
     private readonly prismaService: PrismaService,
   ) {}
@@ -112,6 +114,11 @@ export class FilesService {
   async delete(uuid: string): Promise<CommonResponseDto> {
     await this.checkFileExists(uuid);
     await this.fileConfigService.delete(uuid);
+    await this.prismaService.file.delete({
+      where: {
+        uuid,
+      },
+    });
     return new CommonResponseDto();
   }
 }
