@@ -1,0 +1,33 @@
+name: deploy
+
+on:
+  push:
+    branches: ['main']
+
+jobs:
+  buildndeploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2.5.0
+
+      - name: Build docker image
+        run: docker build -t ghcr.io/kweonminsung/ssimply_backend:latest .
+
+      - name: Docker login & push
+        run: docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_PASSWORD }}
+
+      - name: Push image to registry
+        run: docker push ghcr.io/kweonminsung/ssimply_backend:latest
+
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.5
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            sudo docker login ghcr.io -u ${{ secrets.GHCR_USERNAME }} -p ${{ secrets.GHCR_PASSWORD }}
+            cd ssimply
+            sudo docker-compose pull
+            sudo docker-compose up --force-recreate --build -d
+            sudo docker image prune -f
