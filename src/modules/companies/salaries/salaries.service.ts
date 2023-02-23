@@ -89,15 +89,13 @@ export class SalariesService {
         idCardBuf.push(
           await stream2buffer(
             imgToPDF(
-              [(await this.fileConfigService.download(idCard.uuid)).Body],
+              [await this.fileConfigService.download(idCard.uuid)],
               imgToPDF.sizes.A4,
             ),
           ),
         );
       } else if (idCard.mimeType === 'application/pdf') {
-        idCardBuf.push(
-          (await this.fileConfigService.download(idCard.uuid)).Body,
-        );
+        idCardBuf.push(await this.fileConfigService.download(idCard.uuid));
       }
     }
     const idCardMergedUpload = await this.fileConfigService.uploadByBuffer(
@@ -125,15 +123,13 @@ export class SalariesService {
         accountBuf.push(
           await stream2buffer(
             imgToPDF(
-              [(await this.fileConfigService.download(account.uuid)).Body],
+              [await this.fileConfigService.download(account.uuid)],
               imgToPDF.sizes.A4,
             ),
           ),
         );
       } else if (account.mimeType === 'application/pdf') {
-        accountBuf.push(
-          (await this.fileConfigService.download(account.uuid)).Body,
-        );
+        accountBuf.push(await this.fileConfigService.download(account.uuid));
       }
     }
     const accountMergedUpload = await this.fileConfigService.uploadByBuffer(
@@ -158,13 +154,13 @@ export class SalariesService {
         applyBuf.push(
           await stream2buffer(
             imgToPDF(
-              [(await this.fileConfigService.download(apply.uuid)).Body],
+              [await this.fileConfigService.download(apply.uuid)],
               imgToPDF.sizes.A4,
             ),
           ),
         );
       } else if (apply.mimeType === 'application/pdf') {
-        applyBuf.push((await this.fileConfigService.download(apply.uuid)).Body);
+        applyBuf.push(await this.fileConfigService.download(apply.uuid));
       }
     }
     const applyMergedUpload = await this.fileConfigService.uploadByBuffer(
@@ -189,15 +185,13 @@ export class SalariesService {
         incomeBuf.push(
           await stream2buffer(
             imgToPDF(
-              [(await this.fileConfigService.download(income.uuid)).Body],
+              [await this.fileConfigService.download(income.uuid)],
               imgToPDF.sizes.A4,
             ),
           ),
         );
       } else if (income.mimeType === 'application/pdf') {
-        incomeBuf.push(
-          (await this.fileConfigService.download(income.uuid)).Body,
-        );
+        incomeBuf.push(await this.fileConfigService.download(income.uuid));
       }
     }
     const incomeMergedUpload = await this.fileConfigService.uploadByBuffer(
