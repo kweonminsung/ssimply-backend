@@ -23,8 +23,8 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:3000',
-      'http://ssimply.hackathon.sparcs.org',
-      'https://ssimply.hackathon.sparcs.org',
+      'http://ssimply.kro.kr',
+      'https://ssimply.kro.kr',
     ],
     credentials: true,
   });
